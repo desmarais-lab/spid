@@ -79,7 +79,7 @@ make_eha_data = function(cascades, networks, decay_parameter, min_time) {
         left_join(neighbor_events, by = c('cascade_id' = 'cascade_id',
                                           'node_name' = 'destination_node',
                                           'event_time' = 'time')) %>%
-        dplyr::select(-node_cumsum) %>%
+        dplyr::select(-node_cumsum, -decay_weight) %>%
         mutate(n_neighbor_events = ifelse(is.na(n_neighbor_events), 0,
                                           n_neighbor_events),
                n_neighbor_events_decay = ifelse(is.na(n_neighbor_events_decay),
