@@ -122,7 +122,7 @@ evaluate_grid_point <- function(n_edges, params, time_window, cascades,
                                 min_time = NULL, decay_parameter) {
 
     max_time = max(unlist(cascades$cascade_times))
-    if(is.null(min_time)) min_time = time_window
+    if(is.null(min_time)) min_time = time_window + 1
     times = seq(min_time, max_time, 1)
 
     # Infer the network for all years
@@ -178,7 +178,7 @@ grid_search_eha = function(cascades, n_jobs, n_edges, params, time_windows) {
                                                params = grid_points[i, 1],
                                                time_window = grid_points[i, 3],
                                                cascades = cascades,
-                                               decay_parameter = 1)
+                                               decay_parameter = grid_points[i, 1])
                        }
     stopCluster(cl)
 
